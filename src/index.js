@@ -2,12 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { init } from "@rematch/core";
+import { Provider } from "react-redux";
+import * as models from "./models";
 import * as serviceWorker from './serviceWorker';
+const store = init({
+  models,
+});
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+    <Provider store={store}>
     <App />
-  </React.StrictMode>,
+    </Provider>,
+  // </React.StrictMode>,
   document.getElementById('root')
 );
 

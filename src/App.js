@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
+import {connect} from "react-redux";
 import './App.css';
+import Modal from "./components/Modals/Modal";
+import Button from "@material-ui/core/Button";
+import styled from "styled-components";
+import Game from "./components/Game";
 
-function App() {
+const AppMain = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+`;
+
+function App({ modal, handleModal, gameStart}) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppMain>
+      <Modal/>
+      {
+        gameStart ? (<Game/>) : (
+          <Button style={{display: modal ? 'none' : 'inline-block'}} variant="contained" color="primary"
+                  onClick={() => handleModal()}>
+            Начать игру
+          </Button>)
+      }
+    </AppMain>
   );
 }
 
-export default App;
+const mapState = (state) => {
+  return {
+    modal: state.modal,
+    gameStart: state.gameStart
+  };
+};
+
+const mapDispatch = ({modal: {handleModal}}) => ({
+  handleModal: () => handleModal(),
+});
+export default connect(mapState, mapDispatch)(App);
