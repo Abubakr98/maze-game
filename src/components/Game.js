@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -8,7 +9,8 @@ import Steps from './steps';
 
 const GameMain = styled.div`
   background-color: #ffffff99;
-  width: 80%;
+  width: 100%;
+  height:100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -34,7 +36,7 @@ function Game({
   pushStep,
   setFinishPos,
   restartGame,
-  stepsCount
+  stepsCount,
 }) {
   useEffect(() => {
     const game = new GameEngine(3);
@@ -46,8 +48,9 @@ function Game({
     setFinishPos(game.getFinishPos());
     setSteps([]);
     asyncStack(game.getPathSteps(), pushStep);
-    setGameField(game.getFinishedField());
-  }, [pushStep, restartGame, setFinishPos, setGameField, setSteps, stepsCount]);
+    setGameField(game.getField());
+  }, [restartGame]);
+  
 
   return (
     <GameMain>

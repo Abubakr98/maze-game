@@ -96,11 +96,9 @@ const mapState = (state) => {
 };
 
 const mapDispatch = ({
-  gameField: { setGameField },
   restartGame: { setRestartGame },
   animateSteps: { setAnimateSteps },
 }) => ({
-  setGameField: (field) => setGameField(field),
   setRestartGame: () => setRestartGame(),
   setAnimateSteps: () => setAnimateSteps(),
 });
